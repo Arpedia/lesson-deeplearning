@@ -28,6 +28,9 @@
     <Compile Include="dataset\mnist.py" />
     <Compile Include="dataset\__init__.py" />
     <Compile Include="DeepLearningLesson.py" />
+    <Compile Include="LossFunction.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="CondaEnv|CondaEnv|CondaLearning" />
