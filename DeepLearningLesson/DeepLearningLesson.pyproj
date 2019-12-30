@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>DeepLearningLesson</Name>
     <RootNamespace>DeepLearningLesson</RootNamespace>
+    <InterpreterId>CondaEnv|CondaEnv|CondaLearning</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +25,19 @@
     <Compile Include="ActivationFunction.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="dataset\mnist.py" />
+    <Compile Include="dataset\__init__.py" />
     <Compile Include="DeepLearningLesson.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|CondaLearning" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dataset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dataset\lena.png" />
+    <Content Include="dataset\lena_gray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
