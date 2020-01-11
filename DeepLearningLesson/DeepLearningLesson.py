@@ -3,11 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from dataset.mnist import load_mnist
 from TwoLayerNetwork import TwoLayerNetwork
+from ThreeLayerNetwork import ThreeLayerNetwork
 from Optimazation import StochasticGradientOptimize, MomentumOptimize
 
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False, one_hot_label=True)
 
-network = TwoLayerNetwork(784, 50, 10)
+#network = TwoLayerNetwork(784, 50, 10)
+network = ThreeLayerNetwork(784, 80, 40, 10)
 optimizer = MomentumOptimize(lr = 0.0005, momentum=0.61)
 
 iters_num = 10000
