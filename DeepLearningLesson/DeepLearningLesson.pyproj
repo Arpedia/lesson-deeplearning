@@ -28,7 +28,19 @@
     <Compile Include="dataset\mnist.py" />
     <Compile Include="dataset\__init__.py" />
     <Compile Include="DeepLearningLesson.py" />
+    <Compile Include="GraphLayer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LossFunction.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NumericalMethods.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Optimazation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TwoLayerNetwork.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
