@@ -12,8 +12,8 @@ def relu(x):
     return np.maximum(0, x)
 
 def softmax(x):
-    C = np.max(x)
-    exp_x = np.exp(x - C)
-    sum_exp_x = np.sum(exp_x)
-    y = exp_x / sum_exp_x
+    C = np.max(x, axis = 1)
+    exp_x = np.exp(x - C[:, np.newaxis] * np.ones_like(x))
+    sum_exp_x = np.sum(exp_x, axis = 1)
+    y = exp_x / sum_exp_x[:, np.newaxis]
     return y

@@ -1,6 +1,6 @@
 import numpy as np
 from ActivationFunction import sigmoid, softmax
-from LossFunction import cross_entropy_error
+from LossFunction import cross_entropy_error    
 
 class AddLayer(object):
     def __init__(self):

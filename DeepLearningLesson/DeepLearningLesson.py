@@ -1,35 +1,34 @@
 import sys, os
 import numpy as np
+import matplotlib.pyplot as plt
 from dataset.mnist import load_mnist
 from TwoLayerNetwork import TwoLayerNetwork
-from matplotlib import pyplot
 from Optimazation import StochasticGradientOptimize, MomentumOptimize
 
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False, one_hot_label=True)
 
-train_loss_list = []
+network = TwoLayerNetwork(784, 50, 10)
+optimizer = MomentumOptimize(lr = 0.0005, momentum=0.61)
 
-# Hyper Parameter
 iters_num = 10000
 train_size = x_train.shape[0]
 batch_size = 100
-learning_rate = 0.4
+learning_rate = 0.0015
 
-network = TwoLayerNetwork(x_train.shape[1], 50, 10)
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
 
 iter_per_epoch = max(train_size / batch_size, 1)
 
-#optimizer = StochasticGradientOptimize(learning_rate)
-optimizer = MomentumOptimize(learning_rate)
-
 for i in range(iters_num):
-    batch_mask = np.random.choice(train_size, batch_size)
+    batch_mask = np.random.choice(int(train_size), int(batch_size))
     x_batch = x_train[batch_mask]
     t_batch = t_train[batch_mask]
 
-    #grads = network.gradient(x_batch, t_batch)
-    grads = network.numerical_gradient(x_batch, t_batch)
-    network.params = optimizer.update(network.params, grads)
+    grad = network.gradient(x_batch, t_batch)
+    for key in ('W1', 'b1', 'W2', 'b2'):
+        optimizer.update(network.params, grad)
 
     loss = network.loss(x_batch, t_batch)
     train_loss_list.append(loss)
@@ -37,9 +36,12 @@ for i in range(iters_num):
     if i % iter_per_epoch == 0:
         train_acc = network.accuracy(x_train, t_train)
         test_acc = network.accuracy(x_test, t_test)
-        print(train_acc * 100, test_acc * 100)
+        train_acc_list.append(train_acc)
+        test_acc_list.append(test_acc)
+        print(train_acc, test_acc)
 
-print(network.accuracy(x_test, t_test) * 100)
-
-pyplot.plot(train_loss_list)
-pyplot.show()
+x_axis = np.arange(0, iters_num + 1, iter_per_epoch)
+plt.plot(x_axis, test_acc_list, label="test")
+plt.plot(x_axis, train_acc_list, label="train")
+plt.legend()
+plt.show()
